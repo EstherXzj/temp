@@ -1,0 +1,19 @@
+from socket import *
+ 
+HOST = '192.168.164.2' 
+PORT = 21568
+BUFSIZ =1024
+ADDR = (HOST,PORT)
+ 
+conn_socket = socket(AF_INET,SOCK_STREAM)
+conn_socket.connect(ADDR)
+while True:
+     data = 'This is a message from client'
+     if not data:
+         break
+     conn_socket.send(data.encode())
+     data = conn_socket.recv(BUFSIZ)
+     if not data:
+         break
+     print("recv:" + data.decode('utf-8'))
+conn_socket.close()
